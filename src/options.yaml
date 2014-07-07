@@ -1,0 +1,51 @@
+name: OneMotion
+
+url:
+  https://github.com/fnobi/OneMotion
+
+repository:
+  git://github.com/fnobi/OneMotion.git
+
+title:
+  OneMotion
+
+description:
+  Lightweight physics engine for DOM animation.
+
+keywords: []
+
+favicon_url: ''
+
+viewport: 
+  - width=device-width
+  - initial-scale=1.0
+  - maximum-scale=1.0
+  - user-scalable=0
+
+ios_icon_url: ''
+
+facebook_app_id: ''
+
+ogp_type: 'website'
+
+ogp_image_url: ''
+ogp_image_width: 0
+ogp_image_height: 0
+
+
+sns:
+  twitter:
+    sharetext:
+      Lightweight physics engine for DOM animation.      
+    sharehashtag: []
+
+  facebook:
+    app_id: ''
+    sharetext:
+      Lightweight physics engine for DOM animation.
+
+ogp:
+  image: 
+    url: https://github.com/fnobi/OneMotion/img/ogp-icon.png
+    width: 300
+    height: 300
