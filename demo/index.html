@@ -21,6 +21,22 @@ body {
 <div class="sample">sample</div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="../OneMotion.js"></script>
-<script src="../src/js/OneMotion_demo.js"></script>
+<script>
+var $el = $('.sample');
+var motion = new OneMotion($el, {
+    xProperty: 'top',
+    yProperty: 'left'
+});
+
+$el.on('click', function () {
+    // jump to random direction
+    motion.run({
+        rad: (Math.PI * 2) * Math.random(),
+        power: 200
+    });
+});
+
+
+</script>
 </body>
 </html>
