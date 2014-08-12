@@ -5,9 +5,10 @@ var motion = new OneMotion($el, {
 });
 
 $el.on('click', function () {
+    // jump to random direction
     motion.run({
-        rad: (Math.PI * 2) * 0.5,
-        power: 10
+        rad: (Math.PI * 2) * Math.random(),
+        power: 200
     });
 });
 
