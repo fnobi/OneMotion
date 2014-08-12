@@ -98,12 +98,8 @@ module.exports = function (grunt) {
 
         var ejsDefaultConfig = {
             templateRoot: EJS,
-            template: ['*.ejs'],
-            include: [
-                'bower_components/ejs-head-modules/*.ejs',
-                'bower_components/ejs-sns-modules/*.ejs',
-                EJS + '/layout/*.ejs'
-            ],
+            template: ['*.ejs', 'demo/*.ejs'],
+            include: [],
             silentInclude: true
         };
 
