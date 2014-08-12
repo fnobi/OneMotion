@@ -10,6 +10,8 @@ bower install OneMotion
 
 ## usage
 
+See [demo page](http://fnobi.github.io/OneMotion/demo/) also.
+
 ```javascript
 var $el = $('.sample');
 var motion = new OneMotion($el, {
