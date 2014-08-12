@@ -5,7 +5,13 @@
 <title>OneMotion demo</title>
 <style>
 body {
+  margin: 0px;
+  pading: 0px;
   font-family: sans-serif;
+}
+
+.content {
+  padding: 10px;
 }
 
 .sample1 {
@@ -14,12 +20,16 @@ body {
   color: white;
   background-color: blue;
   padding: 0px 5px;
+  cursor: pointer;
 }
 </style>
 </head>
 <body>
-<section id="content" class="content">
+<section class="content">
+<h1 class="content__title">OneMotion</h1>
+<h2 class="content__subtitle">Lightweight physics engine for DOM animation.</h2>
 <p>This is "OneMotion" demo page.</p>
+<p></p>
 <p>The <span class="sample1">sample1</span> is sample for reflect motion.</p>
 <hr/>
 <p>Please visit the project page also.</p>
@@ -32,7 +42,8 @@ body {
 // get jQuery objects for target elements
 var $sample1 = $('.sample1');
 
-var reflectBoxSize = 500;
+var reflectBoxWidth = $(window).width();
+var reflectBoxHeight = $(window).height();
 var sample1OffsetX = $sample1.get(0).offsetLeft;
 var sample1OffsetY = $sample1.get(0).offsetTop;
 
@@ -43,10 +54,10 @@ var motion1 = new OneMotion($sample1, {
     yProperty: 'top',
 
     // set reflection
-    topWall: -sample1OffsetX,
-    rightWall: reflectBoxSize - sample1OffsetX,
-    bottomWall: reflectBoxSize - sample1OffsetY,
-    leftWall: -sample1OffsetY
+    topWall: -sample1OffsetY,
+    rightWall: reflectBoxWidth - sample1OffsetX,
+    bottomWall: reflectBoxHeight - sample1OffsetY,
+    leftWall: -sample1OffsetX
 });
 
 // set events

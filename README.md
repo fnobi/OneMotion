@@ -16,7 +16,8 @@ See [demo page](http://fnobi.github.io/OneMotion/demo/) also.
 // get jQuery objects for target elements
 var $sample1 = $('.sample1');
 
-var reflectBoxSize = 500;
+var reflectBoxWidth = $(window).width();
+var reflectBoxHeight = $(window).height();
 var sample1OffsetX = $sample1.get(0).offsetLeft;
 var sample1OffsetY = $sample1.get(0).offsetTop;
 
@@ -27,10 +28,10 @@ var motion1 = new OneMotion($sample1, {
     yProperty: 'top',
 
     // set reflection
-    topWall: -sample1OffsetX,
-    rightWall: reflectBoxSize - sample1OffsetX,
-    bottomWall: reflectBoxSize - sample1OffsetY,
-    leftWall: -sample1OffsetY
+    topWall: -sample1OffsetY,
+    rightWall: reflectBoxWidth - sample1OffsetX,
+    bottomWall: reflectBoxHeight - sample1OffsetY,
+    leftWall: -sample1OffsetX
 });
 
 // set events
