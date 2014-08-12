@@ -1,5 +1,9 @@
 // get jQuery objects for target elements
-var $sample1 = $('.sample');
+var $sample1 = $('.sample1');
+
+var reflectBoxSize = 500;
+var sample1OffsetX = $sample1.get(0).offsetLeft;
+var sample1OffsetY = $sample1.get(0).offsetTop;
 
 // init OneMotion
 var motion1 = new OneMotion($sample1, {
@@ -8,10 +12,10 @@ var motion1 = new OneMotion($sample1, {
     yProperty: 'top',
 
     // set reflection
-    topWall: 0,
-    rightWall: 500,
-    bottomWall: 500,
-    leftWall: 0
+    topWall: -sample1OffsetX,
+    rightWall: reflectBoxSize - sample1OffsetX,
+    bottomWall: reflectBoxSize - sample1OffsetY,
+    leftWall: -sample1OffsetY
 });
 
 // set events

@@ -8,22 +8,33 @@ body {
   font-family: sans-serif;
 }
 
-.sample {
+.sample1 {
   display: inline-block;
   position: relative;
-  padding: 10px;
   color: white;
   background-color: blue;
+  padding: 0px 5px;
 }
 </style>
 </head>
 <body>
-<div class="sample">sample</div>
+<section id="content" class="content">
+<p>This is "OneMotion" demo page.</p>
+<p>The <span class="sample1">sample1</span> is sample for reflect motion.</p>
+<hr/>
+<p>Please visit the project page also.</p>
+<p><a href="http://github.com/fnobi/OneMotion">http://github.com/fnobi/OneMotion</a></p>
+<p>Enjoy!</p>
+<!-- /.content --></section>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="../OneMotion.js"></script>
 <script>
 // get jQuery objects for target elements
-var $sample1 = $('.sample');
+var $sample1 = $('.sample1');
+
+var reflectBoxSize = 500;
+var sample1OffsetX = $sample1.get(0).offsetLeft;
+var sample1OffsetY = $sample1.get(0).offsetTop;
 
 // init OneMotion
 var motion1 = new OneMotion($sample1, {
@@ -32,10 +43,10 @@ var motion1 = new OneMotion($sample1, {
     yProperty: 'top',
 
     // set reflection
-    topWall: 0,
-    rightWall: 500,
-    bottomWall: 500,
-    leftWall: 0
+    topWall: -sample1OffsetX,
+    rightWall: reflectBoxSize - sample1OffsetX,
+    bottomWall: reflectBoxSize - sample1OffsetY,
+    leftWall: -sample1OffsetY
 });
 
 // set events
