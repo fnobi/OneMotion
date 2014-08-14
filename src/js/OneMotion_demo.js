@@ -10,8 +10,8 @@ var sample1OffsetY = $sample1.get(0).offsetTop;
 // init OneMotion
 var motion1 = new OneMotion($sample1, {
     // css properties to use as x and y
-    xProperty: 'left', 
-    yProperty: 'top',
+    xProperty: 'transform',
+    yProperty: 'transform',
 
     // set reflection
     topWall: -sample1OffsetY,

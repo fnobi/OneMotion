@@ -89,8 +89,21 @@ OneMotion.prototype.run = function (opts) {
         inc();
 
         var css = {};
-        css[xProperty] = self.x + 'px';
-        css[yProperty] = self.y + 'px';
+        var transformList = [];
+        if (xProperty == 'transform') {
+            transformList.push('translateX(' + self.x + 'px)');
+        } else {
+            css[xProperty] = self.x + 'px';
+        }
+        if (yProperty == 'transform') {
+            transformList.push('translateY(' + self.y + 'px)');
+        } else {
+            css[yProperty] = self.y + 'px';
+        }
+        if (transformList.length) {
+            var transform = transformList.join(' ');
+            css['transform'] = css['-webkit-transform'] = transform;
+        }
         $el.css(css);
 
         if (self.x < leftWall && Math.cos(rad) < 0) {
