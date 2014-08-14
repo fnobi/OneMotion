@@ -5,7 +5,7 @@ Lightweight physics engine for DOM animation.
 ## install
 
 ```
-bower install OneMotion
+bower install one-motion
 ```
 
 ## usage
