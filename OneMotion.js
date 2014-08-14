@@ -9,7 +9,8 @@ function OneMotion ($el, opts) {
         yProperty: 'margin-top',
         minDiff: 0.1,
         clock: 25,
-        friction: 0.5
+        friction: 0.2,
+        stickyPower: 3
     });
 
     if (opts) {
@@ -26,10 +27,14 @@ OneMotion.prototype.config = function (opts) {
     this.clock = isNaN(opts.clock) ? this.clock : opts.clock;
     this.friction = isNaN(opts.friction) ? this.friction : opts.friction;
 
-    this.topWall = (opts.topWall !== undefined) ? opts.topWall : this.topWall;
-    this.rightWall = (opts.rightWall !== undefined) ? opts.rightWall : this.rightWall;
-    this.bottomWall = (opts.bottomWall !== undefined) ? opts.bottomWall : this.bottomWall;
-    this.leftWall = (opts.leftWall !== undefined) ? opts.leftWall : this.leftWall;
+    this.topWall = isNaN(opts.topWall) ? this.topWall : opts.topWall;
+    this.rightWall = isNaN(opts.rightWall) ? this.rightWall : opts.rightWall;
+    this.bottomWall = isNaN(opts.bottomWall) ? this.bottomWall : opts.bottomWall;
+    this.leftWall = isNaN(opts.leftWall) ? this.leftWall : opts.leftWall;
+
+    this.stickyX = isNaN(opts.stickyX) ? this.stickyX : opts.stickyX;
+    this.stickyY = isNaN(opts.stickyY) ? this.stickyY : opts.stickyY;
+    this.stickyPower = isNaN(opts.stickyPower) ? this.stickyPower : opts.stickyPower;
 };
 
 OneMotion.prototype.run = function (opts) {
@@ -50,6 +55,10 @@ OneMotion.prototype.run = function (opts) {
     var bottomWall = this.bottomWall;
     var leftWall = this.leftWall;
 
+    var stickyX = this.stickyX;
+    var stickyY = this.stickyY;
+    var stickyPower = this.stickyPower;
+
     var rate = 1000 / clock;
 
     var self = this;
@@ -58,6 +67,18 @@ OneMotion.prototype.run = function (opts) {
     function inc() {
         self.x += Math.cos(rad) * power / rate;
         self.y += Math.sin(rad) * power / rate;
+    }
+
+    function vectorAdd (rad1, power1, rad2, power2) {
+        var x1 = Math.cos(rad1) * power1;
+        var y1 = Math.sin(rad1) * power1;
+        var x2 = Math.cos(rad2) * power2;
+        var y2 = Math.sin(rad2) * power2;
+
+        return {
+            power: Math.sqrt(Math.pow(x1 + x2, 2) + Math.pow(y1 + y2, 2)),
+            rad: Math.atan2(y1 + y2, x1 + x2)
+        };
     }
 
     if (this.loop) {
@@ -80,6 +101,17 @@ OneMotion.prototype.run = function (opts) {
             rad = -rad;
         } else if (self.y > bottomWall && Math.sin(rad) > 0) {
             rad = -rad;
+        }
+
+        if (!isNaN(stickyX) && !isNaN(stickyY) && !isNaN(stickyPower)) {
+            var xDistance = (stickyX - self.x);
+            var yDistance = (stickyY - self.y);
+            var stickyRad = Math.atan2(yDistance, xDistance);
+            var vector = vectorAdd(rad, power, stickyRad, (
+                stickyPower * Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2))
+            ));
+            rad = vector.rad;
+            power = vector.power;
         }
         
         power *= Math.pow(friction, 1 / rate);
