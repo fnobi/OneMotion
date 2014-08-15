@@ -5,8 +5,8 @@ function OneMotion ($el, opts) {
     this.y = 0;
 
     this.config({
-        xProperty: 'margin-left',
-        yProperty: 'margin-top',
+        xProperty: 'transform',
+        yProperty: 'transform',
         minDiff: 0.1,
         clock: 25,
         friction: 0.2,
