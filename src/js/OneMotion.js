@@ -37,9 +37,8 @@ OneMotion.prototype.config = function (opts) {
     this.stickyPower = isNaN(opts.stickyPower) ? this.stickyPower : opts.stickyPower;
 };
 
-OneMotion.prototype.run = function (opts) {
+OneMotion.prototype.hit = function (opts) {
     opts = opts || {};
-    this.config(opts);
 
     var rad = opts.rad || (Math.PI * 2 * 0.75);
     var power = opts.power || 1;

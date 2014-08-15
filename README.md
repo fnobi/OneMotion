@@ -39,16 +39,16 @@ var motion2 = new OneMotion($sample2, {
 
 // set events
 $sample1.on('click', function () {
-    // run to random direction
-    motion1.run({
+    // hit to random direction
+    motion1.hit({
         rad: (Math.PI * 2) * Math.random(),
         power: 500
     });
 });
 
 $sample2.on('click', function () {
-    // run to random direction
-    motion2.run({
+    // hit to random direction
+    motion2.hit({
         rad: (Math.PI * 2) * Math.random(),
         power: 1000
     });
