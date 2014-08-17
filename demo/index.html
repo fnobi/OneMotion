@@ -38,6 +38,7 @@ body {
 <p></p>
 <p>The <span class="sample1">sample1</span> is sample for reflect motion.</p>
 <p>The <span class="sample2">sample2</span> is sample for sticky motion.</p>
+<p>Here is <a class="reset" href="#">button</a> to reset objects motion ande position.</p>
 <hr/>
 <p>Please visit the project page also.</p>
 <p><a href="http://github.com/fnobi/OneMotion">http://github.com/fnobi/OneMotion</a></p>
@@ -87,6 +88,16 @@ $sample2.on('click', function () {
     });
 });
 
+// reset button
+$('.reset').on('click', function (e) {
+    e.preventDefault();
+    
+    motion1.stop();
+    motion1.put(0, 0);
+
+    motion2.stop();
+    motion2.put(0, 0);
+});
 
 </script>
 </body>

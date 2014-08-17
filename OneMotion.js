@@ -43,8 +43,6 @@ OneMotion.prototype.hit = function (opts) {
     var rad = opts.rad || (Math.PI * 2 * 0.75);
     var power = opts.power || 1;
 
-    var xProperty = this.xProperty;
-    var yProperty = this.yProperty;
     var minDiff = this.minDiff;
     var clock = this.clock;
     var friction = this.friction;
@@ -61,12 +59,6 @@ OneMotion.prototype.hit = function (opts) {
     var rate = 1000 / clock;
 
     var self = this;
-    var $el = this.$el;
-
-    function inc() {
-        self.x += Math.cos(rad) * power / rate;
-        self.y += Math.sin(rad) * power / rate;
-    }
 
     function vectorAdd (rad1, power1, rad2, power2) {
         var x1 = Math.cos(rad1) * power1;
@@ -85,25 +77,10 @@ OneMotion.prototype.hit = function (opts) {
     }
 
     this.loop = setInterval(function () {
-        inc();
-
-        var css = {};
-        var transformList = [];
-        if (xProperty == 'transform') {
-            transformList.push('translateX(' + self.x + 'px)');
-        } else {
-            css[xProperty] = self.x + 'px';
-        }
-        if (yProperty == 'transform') {
-            transformList.push('translateY(' + self.y + 'px)');
-        } else {
-            css[yProperty] = self.y + 'px';
-        }
-        if (transformList.length) {
-            var transform = transformList.join(' ');
-            css['transform'] = css['-webkit-transform'] = transform;
-        }
-        $el.css(css);
+        self.put(
+            self.x + Math.cos(rad) * power / rate,
+            self.y + Math.sin(rad) * power / rate
+        );
 
         if (self.x < leftWall && Math.cos(rad) < 0) {
             rad = Math.PI - rad;
@@ -129,7 +106,38 @@ OneMotion.prototype.hit = function (opts) {
         power *= Math.pow(friction, 1 / rate);
 
         if (power < minDiff) {
-            clearInterval(self.loop);
+            self.stop();
         }
     }, clock);
+};
+
+OneMotion.prototype.put = function (x, y) {
+    var $el = this.$el;
+    var xProperty = this.xProperty;
+    var yProperty = this.yProperty;
+
+    this.x = x;
+    this.y = y;
+
+    var css = {};
+    var transformList = [];
+    if (xProperty == 'transform') {
+        transformList.push('translateX(' + x + 'px)');
+    } else {
+        css[xProperty] = x + 'px';
+    }
+    if (yProperty == 'transform') {
+        transformList.push('translateY(' + y + 'px)');
+    } else {
+        css[yProperty] = y + 'px';
+    }
+    if (transformList.length) {
+        var transform = transformList.join(' ');
+        css['transform'] = css['-webkit-transform'] = transform;
+    }
+    $el.css(css);
+};
+
+OneMotion.prototype.stop = function () {
+    clearInterval(this.loop);
 };

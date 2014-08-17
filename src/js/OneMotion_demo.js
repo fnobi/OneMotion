@@ -39,3 +39,13 @@ $sample2.on('click', function () {
     });
 });
 
+// reset button
+$('.reset').on('click', function (e) {
+    e.preventDefault();
+    
+    motion1.stop();
+    motion1.put(0, 0);
+
+    motion2.stop();
+    motion2.put(0, 0);
+});
