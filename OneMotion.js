@@ -7,6 +7,7 @@ function OneMotion ($el, opts) {
     this.config({
         xProperty: 'transform',
         yProperty: 'transform',
+        headRad: 0,
         minDiff: 0.1,
         clock: 25,
         friction: 0.2,
@@ -23,9 +24,12 @@ OneMotion.prototype.config = function (opts) {
 
     this.xProperty = opts.xProperty || this.xProperty;
     this.yProperty = opts.yProperty || this.yProperty;
+    this.rotateProperty = opts.rotateProperty || this.rotateProperty;
+    
     this.minDiff = isNaN(opts.minDiff) ? this.minDiff : opts.minDiff;
     this.clock = isNaN(opts.clock) ? this.clock : opts.clock;
     this.friction = isNaN(opts.friction) ? this.friction : opts.friction;
+    this.headRad = isNaN(opts.headRad) ? this.headRad : opts.headRad;
 
     this.topWall = isNaN(opts.topWall) ? this.topWall : opts.topWall;
     this.rightWall = isNaN(opts.rightWall) ? this.rightWall : opts.rightWall;
@@ -79,7 +83,8 @@ OneMotion.prototype.hit = function (opts) {
     this.loop = setInterval(function () {
         self.put(
             self.x + Math.cos(rad) * power / rate,
-            self.y + Math.sin(rad) * power / rate
+            self.y + Math.sin(rad) * power / rate,
+            rad
         );
 
         if (self.x < leftWall && Math.cos(rad) < 0) {
@@ -111,10 +116,14 @@ OneMotion.prototype.hit = function (opts) {
     }, clock);
 };
 
-OneMotion.prototype.put = function (x, y) {
+OneMotion.prototype.put = function (x, y, rad) {
+    rad = isNaN(rad) ? 0 : rad;
+
     var $el = this.$el;
     var xProperty = this.xProperty;
     var yProperty = this.yProperty;
+    var rotateProperty = this.rotateProperty;
+    var headRad = this.headRad;
 
     this.x = x;
     this.y = y;
@@ -130,6 +139,9 @@ OneMotion.prototype.put = function (x, y) {
         transformList.push('translateY(' + y + 'px)');
     } else {
         css[yProperty] = y + 'px';
+    }
+    if (rotateProperty == 'transform') {
+        transformList.push('rotate(' + (180 * (rad + headRad) / Math.PI) + 'deg)');
     }
     if (transformList.length) {
         var transform = transformList.join(' ');

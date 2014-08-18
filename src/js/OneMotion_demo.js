@@ -13,7 +13,10 @@ var motion1 = new OneMotion($sample1, {
     topWall: -sample1OffsetY,
     rightWall: reflectBoxWidth - sample1OffsetX,
     bottomWall: reflectBoxHeight - sample1OffsetY,
-    leftWall: -sample1OffsetX
+    leftWall: -sample1OffsetX,
+
+    // rotate to heading direction
+    rotateProperty: 'transform'
 });
 
 var motion2 = new OneMotion($sample2, {
