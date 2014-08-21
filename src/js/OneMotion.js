@@ -77,10 +77,14 @@ OneMotion.prototype.hit = function (opts) {
     }
 
     if (this.loop) {
-        clearInterval(this.loop);
+        this.stop();
     }
 
+    this.time = 0;
+
     this.loop = setInterval(function () {
+        self.time += clock;
+
         self.put(
             self.x + Math.cos(rad) * power / rate,
             self.y + Math.sin(rad) * power / rate,
@@ -152,4 +156,5 @@ OneMotion.prototype.put = function (x, y, rad) {
 
 OneMotion.prototype.stop = function () {
     clearInterval(this.loop);
+    this.time = null;
 };
