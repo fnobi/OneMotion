@@ -1,4 +1,4 @@
-function OneMotion ($el, opts) {
+var OneMotion = function ($el, opts) {
     this.$el = $el;
 
     this.x = 0;
@@ -19,7 +19,8 @@ function OneMotion ($el, opts) {
     if (opts) {
         this.config(opts);
     }
-}
+};
+OneMotion = EventTrigger.extend(OneMotion);
 
 OneMotion.prototype.config = function (opts) {
     opts = opts || {};
@@ -157,6 +158,8 @@ OneMotion.prototype.put = function (x, y, rad) {
         css['transform'] = css['-webkit-transform'] = transform;
     }
     $el.css(css);
+
+    this.emit('put');
 };
 
 OneMotion.prototype.stop = function () {

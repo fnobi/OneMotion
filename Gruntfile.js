@@ -12,7 +12,8 @@ module.exports = function (grunt) {
     // js library alias
     var alias = {
         $: 'jquery',
-        _: 'underscore'
+        _: 'underscore',
+        EventTrigger: 'event-trigger'
     };
 
 

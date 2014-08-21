@@ -4,6 +4,7 @@
   "version": "0.7.0",
   "main": "src/js/OneMotion.js",
   "dependencies": {
-    "jquery": "~1.10.*"
+    "jquery": "~1.10.*",
+    "event-trigger": "~0.1.1"
   }
 }

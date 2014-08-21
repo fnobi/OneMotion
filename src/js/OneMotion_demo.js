@@ -42,6 +42,25 @@ $sample2.on('click', function () {
     });
 });
 
+// motion tracker with event-trigger
+motion1.on('put', function () {
+    console.log('[%d, %d]', this.x, this.y);
+});
+
+// motion override with event-trigger
+motion2.on('put', function () {
+    var DURATION = 100;
+    var EXPAND = 0.5;
+
+    if (this.time < DURATION) {
+        this.scale = 1 + EXPAND * this.time / DURATION;
+    } else if (this.time < DURATION * 2) {
+        this.scale = 1 + EXPAND - EXPAND * (this.time - DURATION) / DURATION;
+    } else {
+        this.scale = 1;
+    }    
+});
+
 // reset button
 $('.reset').on('click', function (e) {
     e.preventDefault();
@@ -52,3 +71,4 @@ $('.reset').on('click', function (e) {
     motion2.stop();
     motion2.put(0, 0);
 });
+
