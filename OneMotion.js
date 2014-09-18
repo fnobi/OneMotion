@@ -245,6 +245,8 @@ OneMotion.prototype.hit = function (opts) {
             self.stop();
         }
     }, clock);
+
+    this.trigger('hit');
 };
 
 OneMotion.prototype.put = function (x, y, rad) {
@@ -283,10 +285,11 @@ OneMotion.prototype.put = function (x, y, rad) {
     }
     $el.css(css);
 
-    this.emit('put');
+    this.trigger('put');
 };
 
 OneMotion.prototype.stop = function () {
     clearInterval(this.loop);
     this.time = null;
+    this.trigger('stop');
 };
