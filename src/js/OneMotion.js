@@ -5,6 +5,7 @@ var OneMotion = function ($el, opts) {
     this.y = 0;
 
     this.scale = 1;
+    this.loop = null;
 
     this.config({
         xProperty: 'transform',
@@ -79,9 +80,7 @@ OneMotion.prototype.hit = function (opts) {
         };
     }
 
-    if (this.loop) {
-        this.stop();
-    }
+    this.stop();
 
     this.time = 0;
 
@@ -165,7 +164,11 @@ OneMotion.prototype.put = function (x, y, rad) {
 };
 
 OneMotion.prototype.stop = function () {
+    if (!this.loop) {
+        return;
+    }
     clearInterval(this.loop);
     this.time = null;
+    this.loop = null;
     this.trigger('stop');
 };
