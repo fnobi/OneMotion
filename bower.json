@@ -1,7 +1,7 @@
 {
   "name": "one-motion",
   "description": "Lightweight physics engine for DOM animation.",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "main": "src/js/OneMotion.js",
   "dependencies": {
     "jquery": "~1.10.*",
