@@ -14,7 +14,9 @@ var OneMotion = function ($el, opts) {
         minDiff: 0.1,
         clock: 25,
         friction: 0.2,
-        stickyPower: 3
+        stickyPower: 3,
+        width: 0,
+        height: 0
     });
 
     if (opts) {
@@ -39,6 +41,9 @@ OneMotion.prototype.config = function (opts) {
     this.rightWall = isNaN(opts.rightWall) ? this.rightWall : opts.rightWall;
     this.bottomWall = isNaN(opts.bottomWall) ? this.bottomWall : opts.bottomWall;
     this.leftWall = isNaN(opts.leftWall) ? this.leftWall : opts.leftWall;
+
+    this.width = isNaN(opts.width) ? this.width : opts.width;
+    this.height = isNaN(opts.height) ? this.height : opts.height;
 
     this.stickyX = isNaN(opts.stickyX) ? this.stickyX : opts.stickyX;
     this.stickyY = isNaN(opts.stickyY) ? this.stickyY : opts.stickyY;
@@ -79,6 +84,9 @@ OneMotion.prototype.draw = function (delta) {
     var bottomWall = this.bottomWall;
     var leftWall = this.leftWall;
 
+    var width = this.width;
+    var height = this.height;
+
     var stickyX = this.stickyX;
     var stickyY = this.stickyY;
     var stickyPower = this.stickyPower;
@@ -95,11 +103,11 @@ OneMotion.prototype.draw = function (delta) {
 
     if (this.x < leftWall && Math.cos(this.rad) < 0) {
         this.rad = Math.PI - this.rad;
-    } else if (this.x > rightWall && Math.cos(this.rad) > 0) {
+    } else if (this.x + width > rightWall && Math.cos(this.rad) > 0) {
         this.rad = Math.PI - this.rad;
     } else if (this.y < topWall && Math.sin(this.rad) < 0) {
         this.rad = -this.rad;
-    } else if (this.y > bottomWall && Math.sin(this.rad) > 0) {
+    } else if (this.y + height > bottomWall && Math.sin(this.rad) > 0) {
         this.rad = -this.rad;
     }
 

@@ -15,6 +15,9 @@ var motion1 = new OneMotion($sample1, {
     bottomWall: reflectBoxHeight - sample1OffsetY,
     leftWall: -sample1OffsetX,
 
+    width: $sample1.width(),
+    height: $sample1.height(),
+
     // rotate to heading direction
     rotateProperty: 'transform'
 });
