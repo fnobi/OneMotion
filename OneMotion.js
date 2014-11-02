@@ -167,6 +167,8 @@ OneMotion.prototype.config = function (opts) {
     this.stickyX = isNaN(opts.stickyX) ? this.stickyX : opts.stickyX;
     this.stickyY = isNaN(opts.stickyY) ? this.stickyY : opts.stickyY;
     this.stickyPower = isNaN(opts.stickyPower) ? this.stickyPower : opts.stickyPower;
+
+    this.drawManually = !!opts.drawManually;
 };
 
 OneMotion.prototype.hit = function (opts) {
@@ -183,11 +185,13 @@ OneMotion.prototype.hit = function (opts) {
 
     this.trigger('hit');
 
-    var instance = this;
-    var clock = this.clock;
-    this.loop = setInterval(function () {
-        instance.draw(clock);
-    }, clock);
+    if (!this.drawManually) {
+        var instance = this;
+        var clock = this.clock;
+        this.loop = setInterval(function () {
+            instance.draw(clock);
+        }, clock);
+    }
 };
 
 OneMotion.prototype.draw = function (delta) {
