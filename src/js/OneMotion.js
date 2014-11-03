@@ -169,10 +169,11 @@ OneMotion.prototype.put = function (x, y, rad) {
 };
 
 OneMotion.prototype.stop = function () {
-    if (!this.loop) {
-        return;
+    if (!this.drawManually) {
+        if (this.loop) {
+            clearInterval(this.loop);
+        }
     }
-    clearInterval(this.loop);
     this.time = null;
     this.loop = null;
     this.trigger('stop');
