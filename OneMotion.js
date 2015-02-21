@@ -132,8 +132,8 @@ var OneMotion = function ($el, opts) {
     this.loop = null;
 
     this.config({
-        xProperty: 'transform',
-        yProperty: 'transform',
+        xProperty: 'translate',
+        yProperty: 'translate',
         headRad: 0,
         minDiff: 0.1,
         clock: 25,
@@ -267,12 +267,12 @@ OneMotion.prototype.put = function (x, y, rad) {
 
     var css = {};
     var transformList = [];
-    if (xProperty == 'transform') {
+    if (xProperty == 'translate') {
         transformList.push('translateX(' + x + 'px)');
     } else {
         css[xProperty] = x + 'px';
     }
-    if (yProperty == 'transform') {
+    if (yProperty == 'translate') {
         transformList.push('translateY(' + y + 'px)');
     } else {
         css[yProperty] = y + 'px';
