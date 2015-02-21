@@ -128,7 +128,6 @@ var OneMotion = function ($el, opts) {
     this.x = 0;
     this.y = 0;
 
-    this.scale = 1;
     this.loop = null;
 
     this.config({
@@ -279,9 +278,6 @@ OneMotion.prototype.put = function (x, y, rad) {
     }
     if (rotateProperty == 'transform') {
         transformList.push('rotate(' + (180 * (rad + headRad) / Math.PI) + 'deg)');
-    }
-    if (this.scale != 1 && !isNaN(this.scale)) {
-        transformList.push('scale(' + this.scale + ')');
     }
     if (transformList.length) {
         var transform = transformList.join(' ');
