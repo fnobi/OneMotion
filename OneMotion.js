@@ -139,7 +139,8 @@ var OneMotion = function ($el, opts) {
         friction: 0.2,
         stickyPower: 3,
         width: 0,
-        height: 0
+        height: 0,
+        perspective: 1.001
     });
 
     if (opts) {
@@ -171,6 +172,8 @@ OneMotion.prototype.config = function (opts) {
     this.stickyX = isNaN(opts.stickyX) ? this.stickyX : opts.stickyX;
     this.stickyY = isNaN(opts.stickyY) ? this.stickyY : opts.stickyY;
     this.stickyPower = isNaN(opts.stickyPower) ? this.stickyPower : opts.stickyPower;
+
+    this.perspective = isNaN(opts.perspective) ? this.perspective : opts.perspective;
 
     this.drawManually = !!opts.drawManually;
 };
@@ -268,11 +271,15 @@ OneMotion.prototype.put = function (x, y, rad) {
     var transformList = [];
     if (xProperty == 'translate') {
         transformList.push('translateX(' + x + 'px)');
+    } else if (xProperty == 'scale') {
+        transformList.push('scale(' + Math.pow(this.perspective, x) + ')');
     } else {
         css[xProperty] = x + 'px';
     }
     if (yProperty == 'translate') {
         transformList.push('translateY(' + y + 'px)');
+    } else if (yProperty == 'scale') {
+        transformList.push('scale(' + Math.pow(this.perspective, y) + ')');
     } else {
         css[yProperty] = y + 'px';
     }
