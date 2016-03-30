@@ -194,3 +194,8 @@ OneMotion.vectorAdd = function (rad1, power1, rad2, power2) {
     };
 };
 
+
+// exports
+if (module) {
+    module.exports = OneMotion;
+}
