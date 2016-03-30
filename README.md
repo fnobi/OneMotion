@@ -8,6 +8,10 @@ Lightweight physics engine for DOM animation.
 bower install one-motion
 ```
 
+```
+npm install one-motion
+```
+
 ## usage
 
 See [demo page](http://fnobi.github.io/OneMotion/demo/) also.
