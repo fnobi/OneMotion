@@ -1,7 +1,7 @@
 {
   "name": "one-motion",
   "description": "Lightweight physics engine for DOM animation.",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "main": "src/js/OneMotion.js",
   "devDependencies": {
     "grunt": "~0.4.0",
