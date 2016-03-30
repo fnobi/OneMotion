@@ -50,6 +50,8 @@ OneMotion.prototype.config = function (opts) {
 
     this.perspective = isNaN(opts.perspective) ? this.perspective : opts.perspective;
 
+    this.intValue = !!opts.intValue;
+
     this.drawManually = !!opts.drawManually;
 
     this.dispatcher = opts.dispatcher;
@@ -136,6 +138,9 @@ OneMotion.prototype.draw = function (delta) {
 
 OneMotion.prototype.put = function (x, y, rad) {
     rad = isNaN(rad) ? 0 : rad;
+
+    x = this.intValue ? Math.floor(x) : x;
+    y = this.intValue ? Math.floor(y) : y;
 
     var $el = this.$el;
     var xProperty = this.xProperty;
