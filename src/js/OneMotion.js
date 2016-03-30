@@ -23,7 +23,6 @@ var OneMotion = function ($el, opts) {
         this.config(opts);
     }
 };
-OneMotion = EventTrigger.extend(OneMotion);
 
 OneMotion.prototype.config = function (opts) {
     opts = opts || {};
@@ -52,6 +51,8 @@ OneMotion.prototype.config = function (opts) {
     this.perspective = isNaN(opts.perspective) ? this.perspective : opts.perspective;
 
     this.drawManually = !!opts.drawManually;
+
+    this.dispatcher = opts.dispatcher;
 };
 
 OneMotion.prototype.hit = function (opts) {
@@ -66,7 +67,9 @@ OneMotion.prototype.hit = function (opts) {
     this.stop();
     this.time = 0;
 
-    this.trigger('hit');
+    if (this.dispatcher) {
+        this.dispatcher.emit('hit');
+    }
 
     if (!this.drawManually) {
         var instance = this;
@@ -168,7 +171,9 @@ OneMotion.prototype.put = function (x, y, rad) {
     }
     $el.css(css);
 
-    this.trigger('put');
+    if (this.dispatcher) {
+        this.dispatcher.emit('put');
+    }
 };
 
 OneMotion.prototype.stop = function () {
@@ -179,7 +184,9 @@ OneMotion.prototype.stop = function () {
     }
     this.time = null;
     this.loop = null;
-    this.trigger('stop');
+    if (this.dispatcher) {
+        this.dispatcher.emit('stop');
+    }
 };
 
 OneMotion.vectorAdd = function (rad1, power1, rad2, power2) {
