@@ -1,5 +1,5 @@
 {
-  "name": "OneMotion",
+  "name": "one-motion",
   "description": "Lightweight physics engine for DOM animation.",
   "version": "1.0.0",
   "main": "src/js/OneMotion.js",
