@@ -57,7 +57,7 @@ OneMotion.prototype.config = function (opts) {
 
 OneMotion.prototype.hit = function (opts) {
     opts = opts || {};
-    var rad = opts.rad || (Math.PI * 2 * 0.75);
+    var rad = isNaN(opts.rad) ? (Math.PI * 2 * 0.75) : opts.rad;
     var power = opts.power || 1;
 
     // TODO: 既存のradとpowerとの掛け合わせ
