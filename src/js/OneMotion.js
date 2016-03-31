@@ -7,6 +7,7 @@ var OneMotion = function ($el, opts) {
     this.loop = null;
 
     this.ticker = opts.ticker;
+    this.rendering = true;
 
     this.config({
         xProperty: 'translate',
@@ -116,6 +117,8 @@ OneMotion.prototype.draw = function (delta) {
 
     this.time += delta;
 
+    this.power *= Math.pow(friction, 1 / rate);
+
     this.put(
         this.x + Math.cos(this.rad) * this.power / rate,
         this.y + Math.sin(this.rad) * this.power / rate,
@@ -143,8 +146,6 @@ OneMotion.prototype.draw = function (delta) {
         this.power = vector.power;
     }
     
-    this.power *= Math.pow(friction, 1 / rate);
-
     if (this.power < minDiff) {
         this.stop();
     }
@@ -188,7 +189,9 @@ OneMotion.prototype.put = function (x, y, rad) {
         var transform = transformList.join(' ');
         css['transform'] = css['-webkit-transform'] = transform;
     }
-    $el.css(css);
+    if (this.rendering) {
+        $el.css(css);
+    }
 
     if (this.dispatcher) {
         this.dispatcher.emit('put');
