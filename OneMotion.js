@@ -6,6 +6,8 @@ var OneMotion = function ($el, opts) {
 
     this.loop = null;
 
+    this.ticker = opts.ticker;
+
     this.config({
         xProperty: 'translate',
         yProperty: 'translate',
@@ -73,12 +75,24 @@ OneMotion.prototype.hit = function (opts) {
         this.dispatcher.emit('hit');
     }
 
-    if (!this.drawManually) {
-        var instance = this;
-        var clock = this.clock;
-        this.loop = setInterval(function () {
-            instance.draw(clock);
-        }, clock);
+    if (this.drawManually) {
+        return;
+    }
+
+    var instance = this;
+
+    var prevTime = Date.now();
+    
+    this.handler = function () {
+        var time = Date.now();
+        instance.draw(time - prevTime);
+        prevTime = time;
+    };
+    
+    if (this.ticker) {
+        this.ticker.on('tick', this.handler);
+    } else {
+        this.loop = setInterval(this.handler, this.clock);
     }
 };
 
@@ -185,6 +199,9 @@ OneMotion.prototype.stop = function () {
     if (!this.drawManually) {
         if (this.loop) {
             clearInterval(this.loop);
+        }
+        if (this.ticker && this.handler) {
+            this.ticker.removeListener('tick', this.handler);
         }
     }
     this.time = null;
